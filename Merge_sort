@@ -1,0 +1,31 @@
+# implementation of merge sort
+def mergesort(lst):
+    ;  # your code here
+    def merge(left, right):
+        sorted = []  # Our sorted array
+        i, j = 0, 0  # Assigning values
+
+        while i < len(left) and j < len(right):  # Conditions to enter our while loop to iterate the array
+            if left[i] < right[j]:  # If our left index i is less than right j
+                sorted.append(left[i])  # Append left i to array 'sorted'
+                i += 1  # Move to next index i
+            else:  # If left isn't smaller
+                sorted.append(right[j])  # Append right j to array 'sorted'
+                j += 1  # Move to next index j
+
+        sorted += left[i:]  # Recursively add and sort each side
+        sorted += right[j:]
+        return sorted  # Our sorted array
+
+    def merge_sort(lst):
+        if len(lst) == 1:
+            return lst
+        middle = len(lst) / 2  # Defining the mid
+        left_lst = merge_sort(lst[: middle])  # Defining left
+        right_lst = merge_sort(lst[middle:])  # Defining right
+        return merge(left_lst, right_lst)  # Call merge function using the left and right we defined
+
+
+# add the function to the function list
+f_list.append(mergesort)
+f_name_list.append("Mergesort")
