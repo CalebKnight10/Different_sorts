@@ -1,0 +1,29 @@
+# implementation of quick sort
+def quicksort(lst):
+    quicksortt(lst, 0, len(lst) - 1)
+    ;  # your code here
+    def quicksortt(arr, lo, hi):
+        if lo < hi:
+            part_ind = part(arr, lo, hi)  # partitioning index
+            quicksortt(arr, lo, part_ind - 1)  # Sort elements before partition
+            quicksortt(arr, part_ind + 1, hi)  # Sort elements after partition
+
+    def part(arr, lo, hi):
+        i = (lo - 1)  # index of small element
+        pivot = arr[hi]  # our pivot
+
+        for j in range(lo, hi):
+            # If our current element is smaller than our pivot in the array
+            if arr[j] < pivot:
+                # increment index of smaller num
+                i = i + 1
+                # swap arr[i] and arr[j]
+                arr[i], arr[j] = arr[j], arr[i]
+
+        # swap arr[i + 1] with arr[hi]
+        arr[i + 1], arr[hi] = arr[hi], arr[i + 1]
+        return (i + 1)
+
+    # add the function to the function list
+    f_list.append(quicksort)
+    f_name_list.append("Quicksort")
