@@ -1,0 +1,98 @@
+# From Patrick Donnely CS 325 @ OSU-Cascades Driver code for our COLLAB Assignment 
+# import libraries
+import time
+from numpy.random import seed
+from numpy.random import randint
+import matplotlib.pyplot as plt
+
+# GLOBAL VARIABLES
+
+# lists to store functions and their names (string)
+f_list = []
+f_name_list = []
+
+# DATA GENERATION
+
+# function to generate a random list
+def random_list(max):
+    return randint(0, max, max)
+
+
+# function to generate a semi-sorted list
+def semisorted_list(max):
+    last = 0
+    lst = []
+    for i in range(max):
+        cur = randint(-1, 5) + last
+        lst.append(cur)
+        last = cur
+    return lst
+
+
+# function to generate a sorted list
+def sorted_list(max):
+    return list(range(0, max))
+
+
+# function to generate a backwards sorted list
+def reversed_list(max):
+    lst = list(range(0, max))
+    lst.reverse()
+    return lst
+
+
+# EXPERIMENT AND GRAPHING
+
+# function that runs a set of functions, times their output, and
+#    graphs time vs input size
+def time_algorithms(data_f, fs, fnames, experiment):
+    if len(fs) != len(fnames):
+        print("Error: functions and name lists must be the same size!")
+        return;
+
+    fcount = 0
+    # initialize graph
+    fig, ax1 = plt.subplots()
+    ax1.set_title(experiment)
+    ax1.set_xlabel('n')
+    ax1.set_ylabel('time (s)')
+
+    # for each sorting algorithm
+    for f in fs:
+        # randomly generates list of different sizes
+        elements = list()
+        times = list()
+        # run 10 iterations of the experiment
+        for i in range(1, 11):
+            # generate some data
+            lst = data_f(50 * i)
+
+            # run the algorithm and time it
+            start = time.clock()
+            f(lst)
+            end = time.clock()
+
+            # save results for graphing
+            elements.append(len(lst))
+            times.append(end - start)
+
+            # graph the complexity
+        ax1.plot(elements, times, label=fnames[fcount])
+        fcount = fcount + 1
+
+    # display the graph
+    ax1.grid()
+    ax1.legend()
+    fig.show()
+
+# run the sorting algorithms on random data
+time_algorithms(random_list, f_list, f_name_list, 'Random Data')
+
+# run the sorting algorithms on data that is nearly sorted
+time_algorithms(semisorted_list, f_list, f_name_list, 'Semisorted Data')
+
+# run the sorting algorithms on already sorted data
+time_algorithms(sorted_list, f_list, f_name_list, 'Sorted Data')
+
+# run the sorting algorithms on data perfectly reversed
+time_algorithms(reversed_list, f_list, f_name_list, 'Reversed Data')
