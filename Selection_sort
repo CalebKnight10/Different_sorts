@@ -1,0 +1,13 @@
+# implementation of selection sort
+def selection_sort(lst):
+    ;  # your code here
+    for i in range(len(lst)):  # Go through entire array of elements
+        mindex = i  # establish mindex being set to i
+        for j in range(i + 1, len(lst)):  # Iterate through unsorted array of elements
+            if lst[mindex] > lst[j]:  # compare smallest current index to next viewed index, if smaller...
+                mindex = j  # put the new mindex to j (swap)
+
+
+# add the function to the function list
+f_list.append(selection_sort)
+f_name_list.append("Selection Sort")     
