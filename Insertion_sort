@@ -1,0 +1,18 @@
+# implementation of insertion sort
+def insertion_sort(lst):
+    ;  # your code here
+    for i in range(1, len(lst)):  # Start at one allows us to swap current item with prev
+        curr = lst[i]  # using the variable curr we are able to compare an item with previous items
+        pos = i  # We can't directly change i, so we use a variable as its place
+
+        while pos > 0 and lst[
+            pos - 1] > curr:  # using as long as our index is greater than 0 because if it is 0 or less it will be done
+            lst[pos] = lst[pos - 1]  # Move our larger number 1 spot right
+            pos = pos - 1  # This takes our lst[pos] and moves it left until its the smallest
+
+        lst[pos] = curr  # This takes our lst[pos] and allows us to start comparing it
+
+
+# add the function to the function list
+f_list.append(insertion_sort)
+f_name_list.append("Insertion Sort")
